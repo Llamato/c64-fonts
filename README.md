@@ -23,7 +23,42 @@
 
 # Usage
 ## Using on Real Hardware
-Coming soon!
+### Non permanent
+Download and install [VICE](https://vice-emu.sourceforge.io/index.html#download) for your system. In the bin folder of your download, you will find a tool called c1541.exe. It is a file manager for d64 disk images we are going to use to pack the font into a disk image.
+
+***
+c1541 -format fonts,01 d64 c64fonts.d64 -attach c64fonts.d64 -write <fontfilename> <fontfilenameondisk>
+***
+
+After this command is finished a disk image file called c64fonts.d64 should be in the bin directory.
+
+Next this image needs to be accessed with your c64. There are several tools for making d64 images available to a real c64. My personal favorite is the raspberry pi based cycle exact 1541 hardware emulator called pi1541. More information on that to be found here https://cbm-pi1541.firebaseapp.com/
+
+Once we managed to transport our d64 file to a c64, we are almost done.
+All that is needed now is a loader program to load the font into an appropriate memory location and tell the computer that we would like to use it.
+Below you find a ready to use example loader program.
+
+
+```basic
+10 input "drive"; d
+20 input "filename"; F$
+30 poke 53272, peek(53272) and 240 or 14
+40 sys7812 F$,d,0
+50 poke 780, 0
+60 poke 781, 2
+70 poke 782,56
+80 sys 65493
+90 poke 55,0
+100 poke 56,56
+
+```
+
+Now just enter drive letter of the drive containing the font file and the file name of the font file as prompted and there you go. Now you can use the c64 basic editor in a font of your choice.
+
+To switch back to the default font simply restart your c64.
+
+### permanent
+Coming soon.
 
 ## Using on VICE
 Download and install [VICE](https://vice-emu.sourceforge.io/index.html#download) for your system. Once installed, open x64 (faster) or x64sc (more accurate).
