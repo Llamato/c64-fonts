@@ -26,9 +26,9 @@
 ### Non permanent
 Download and install [VICE](https://vice-emu.sourceforge.io/index.html#download) for your system. In the bin folder of your download, you will find a tool called c1541.exe. It is a file manager for d64 disk images we are going to use to pack the font into a disk image.
 
-***
-c1541 -format fonts,01 d64 c64fonts.d64 -attach c64fonts.d64 -write <fontfilename> <fontfilenameondisk>
-***
+```
+c1541 -format fonts,01 d64 c64fonts.d64 -attach c64fonts.d64 -write fontfilename fontfilenameondisk
+```
 
 After this command is finished a disk image file called c64fonts.d64 should be in the bin directory.
 
